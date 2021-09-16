@@ -19,11 +19,6 @@ const setCurrentDate = () => {
 const actionEventsListener = () => {
   const addButton = document.getElementById('add-task');
   const clearListButton = document.getElementById('clear-task-list');
-  const deleteButtons = document.getElementsByClassName('delete-task');
-
-  Array.from(deleteButtons).forEach((deleteButton) => {
-    deleteButton.addEventListener('click', () => deleteTask(deleteButton));
-  });
 
   addButton.addEventListener('click', addTask);
   clearListButton.addEventListener('click', clearList);
@@ -37,12 +32,26 @@ const deleteTask = (deleteButton) => {
   storeTaskList();
 };
 
-const moveUpTask = () => {
-  
+const moveUpTask = (moveUpButton) => {
+  const taskList = document.getElementById('task-list');
+  const row = moveUpButton.parentNode.parentNode;
+
+  if (row != taskList.firstChild) {
+    taskList.insertBefore(row, row.previousSibling);
+  }
+
+  storeTaskList();
 };
 
-const moveDownTask = () => {
-  
+const moveDownTask = (moveDownButton) => {
+  const taskList = document.getElementById('task-list');
+  const row = moveDownButton.parentNode.parentNode;
+
+  if (row != taskList.lastChild) {
+    taskList.insertBefore(row, row.nextSibling.nextSibling);
+  }
+
+  storeTaskList();
 };
 
 const generateActionColumn = () => {
@@ -66,6 +75,19 @@ const generateActionColumn = () => {
   return actionColumn;
 };
 
+const setActionColumnEvents = (taskList) => {
+  const lastColumn = taskList.lastChild.lastChild.lastChild;
+
+  taskList.lastChild.lastChild.firstChild.addEventListener('click',
+  () => moveUpTask(lastColumn));
+
+  taskList.lastChild.lastChild.lastChild.previousSibling.addEventListener('click',
+  () => moveDownTask(lastColumn));
+
+  taskList.lastChild.lastChild.lastChild.addEventListener('click',
+  () => deleteTask(lastColumn));
+};
+
 const generateTaskList = (task, startDate, endDate, taskStatus) => {
   const taskList = document.getElementById('task-list');
   const taskRow = document.createElement("tr");
@@ -87,6 +109,8 @@ const generateTaskList = (task, startDate, endDate, taskStatus) => {
   taskRow.appendChild(generateActionColumn());
 
   taskList.appendChild(taskRow);
+
+  setActionColumnEvents(taskList);
 };
 
 const clearTaskForm = () => {
