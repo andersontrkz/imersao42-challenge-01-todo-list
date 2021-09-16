@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;                                                                               */
+}
+
+body {
+  background-image: url('https://i.pinimg.com/originals/92/94/1d/92941d986586249ee79a24065f68c910.jpg');
+}
+
+input, select {
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.main__content {
+  display: flex;
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+}
+
+.main__left * {
+  font-size: 1.2rem
+}
+
+.main__left {
+  display: flex;
+  border: rgba(0, 0, 0, 0.555) 1px solid;
+  border-radius: 16px;
+  width: 30%;
+  margin: 0 12px;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.main__left input, .main__left select, .main__left button {
+  width: 100%;
+}
+
+.main__left input, .main__left select {
+  margin-bottom: 24px;
+}
+
+.main__left button {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.main__section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 32px;
+}
+
+.main__right {
+  display: flex;
+  flex-direction: column;
+  border: rgba(0, 0, 0, 0.555) 1px solid;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 16px;
+  width: 70%;
+}
+
+.todo-list__action-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.todo-list__action-buttons button {
+  margin: 16px auto 16px;
+}
+
+#task-list {
+  width: 100%;
+  padding: 0 8px 0 16px;
+  font-size: 16px;
+  float: right;
+}
+
+#task-list tr td {
+  width: 100%;
+  padding: 4px 16px;
+}
+
+#task-list tr td button {
+  padding: 4px;
+  border-radius: 50%;
+  margin: 2px auto 2px;
+}

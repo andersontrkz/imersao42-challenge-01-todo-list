@@ -147,6 +147,7 @@ const startDateConverter = (date) => {
 }
 
 const addTask = () => {
+  const addButton = document.getElementById('add-task');
   const task = document.getElementById('task').value;
   const startDate = document.getElementById('task-start-date').value;
   const endDate = document.getElementById('task-end-date').value;
@@ -164,6 +165,8 @@ const addTask = () => {
 
   storeTaskList();
   clearTaskForm();
+
+  addButton.setAttribute('disabled', true)
 };
 
 const clearList = () => {
@@ -214,9 +217,9 @@ const validateFields = () => {
   const endDate = document.getElementById('task-end-date').value;
 
   if (!task || !endDate) {
-    addButton.setAttribute('disabled', true)
+    addButton.setAttribute('disabled', true);
   } else {
-    addButton.removeAttribute('disabled')
+    addButton.removeAttribute('disabled');
   }
 };
 

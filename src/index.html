@@ -5,39 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
+  <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <header>
       <h1>Todo List</h1>
     </header>
-    
-    <main>
-      <form>
-        <label for="task">Atividade</label>
-        <input type="text" name="task" id="task">
-        <label for="task-start-date">Data de Início</label>
-        <input type="text" name="task-start-date" id="task-start-date" disabled>
-        <label for="task-end-date">Data Limite de Término</label>
-        <input type="date" name="task-end-date" id="task-end-date">
-        <label for="task-status">Status</label>
-        <select name="task-status" id="task-status">
-          <option value="Incompleto">Incompleto</option>
-          <option value="Incompleto">Completo</option>
-        </select>
-      </form>
+    <main class="main__content">
+      <main class="main__left">
+        <section class="main__section">
+          <form>
+            <div>
+              <label for="task">Atividade</label><br>
+              <input type="text" name="task" id="task">
+            </div>
+            <div>
+              <label for="task-start-date">Data de Início</label><br>
+              <input type="text" name="task-start-date" id="task-start-date" disabled>
+            </div>
+            <div>
+              <label for="task-end-date">Data Limite de Término</label><br>
+              <input type="date" name="task-end-date" id="task-end-date">
+            </div>
+            <div>
+              <label for="task-status">Status</label><br>
+              <select name="task-status" id="task-status">
+                <option value="Incompleto">Incompleto</option>
+                <option value="Incompleto">Completo</option>
+              </select>
+            </div>
+            <button id="add-task" disabled>Adicionar</button>
+          </form>
+        </section>
+      </main>
 
-      <button id="add-task" disabled>Adicionar</button>
-      <button id="clear-task-list">Limpar lista</button>
-      <button id="order-asc-task-list">Crescente</button>
-      <button id="order-desc-task-list">Decrescente</button>
-      
-      <table id="task-list">
-      </table>
-      
+      <main class="main__right">
+        <section class="todo-list__action-buttons">
+          <button id="clear-task-list">Limpar Todo List</button>
+          <button id="order-asc-task-list">Ordenação Crescente</button>
+          <button id="order-desc-task-list">Ordenação Decrescente</button>
+        </section>
+        <table id="task-list">
+        </table>
+      </main>
     </main>
-    <footer>
-      
-    </footer>
   </body>
   <script src="script.js"></script>
 </html>
