@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
-  font-family: 'Roboto', sans-serif;                                                                               */
+  font-family: 'Roboto', sans-serif;                                                                               
 }
 
 body {
-  background-image: url('https://i.pinimg.com/originals/92/94/1d/92941d986586249ee79a24065f68c910.jpg');
+  background-image: url('https://wallpaperaccess.com/full/3490461.jpg');
 }
 
 input, select {
@@ -13,13 +13,24 @@ input, select {
   padding: 4px;
 }
 
+button {
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.185);
+  transition: .9s;
+}
+
 .main__content {
   display: flex;
 }
 
-h1 {
-  text-align: center;
-  font-size: 40px;
+img {
+  align-self: center;
+  width: 80px;
+  margin-left: 50%;
 }
 
 .main__left * {
@@ -33,6 +44,7 @@ h1 {
   width: 30%;
   margin: 0 12px;
   background-color: rgba(0, 0, 0, 0.03);
+  max-height: 70vh;
 }
 
 .main__left input, .main__left select, .main__left button {
@@ -56,6 +68,7 @@ h1 {
   flex-direction: row;
   width: 100%;
   padding-top: 32px;
+  max-height: 600px;
 }
 
 .main__right {
@@ -74,6 +87,12 @@ h1 {
 
 .todo-list__action-buttons button {
   margin: 16px auto 16px;
+  font-size: large;
+}
+
+.todo-list__action-buttons button:hover {
+  background-color: rgba(0, 0, 0, 0.185);
+  transition: .9s;
 }
 
 #task-list {
