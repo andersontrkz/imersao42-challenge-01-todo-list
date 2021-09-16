@@ -131,8 +131,17 @@ const clearTaskForm = () => {
   endDateInput.value = '';
 };
 
-const dateConverter = (date) => {
+const endDateConverter = (date) => {
   const [year, month , day] = date.split("-");
+
+  return `${day}/${month}/${year}`;
+}
+
+const startDateConverter = (date) => {
+  let [day, month , year] = date.split("/");
+
+  if (day.length < 10) day = `0${day}`;
+  if (month.length < 10) month = `0${month}`;
 
   return `${day}/${month}/${year}`;
 }
@@ -143,12 +152,13 @@ const addTask = () => {
   const endDate = document.getElementById('task-end-date').value;
   const taskStatus = document.getElementById('task-status').value;
 
-  const convertedDate = dateConverter(endDate);
+  const convertedStartDate = startDateConverter(startDate);
+  const convertedEndDate = endDateConverter(endDate);
 
   generateTaskList(
     task,
-    startDate,
-    convertedDate,
+    convertedStartDate,
+    convertedEndDate,
     taskStatus
   )
 
@@ -211,25 +221,20 @@ const validateFields = () => {
 };
 
 const convertToOrdenableDate = (date) => {
-  const dataSplit = date.split("/");
-  const ordenableDate = new Date(
-    parseInt(dataSplit[2], 10),
-    parseInt(dataSplit[1], 10) - 1,
-    parseInt(dataSplit[0], 10)
-  );
-
-  return ordenableDate;
+  const [day, month, year] = date.split("/");
+  
+  return `${year}${month}${day}`;
 }
 
 const orderByEndDateAsc = () => {
   const storedTaskList = JSON.parse(localStorage.getItem('taskList'));
 
   const orderedTasksAsc = storedTaskList.sort((taskA, taskB) =>  {
-    if (taskA.endDate > taskB.endDate) {
-      return -1;
-    }
-    if (taskA.endDate < taskB.endDate) {
+    if (convertToOrdenableDate(taskA.endDate) > convertToOrdenableDate(taskB.endDate)) {
       return 1;
+    }
+    if (convertToOrdenableDate(taskA.endDate) < convertToOrdenableDate(taskB.endDate)) {
+      return -1;
     }
   });
 
@@ -242,11 +247,11 @@ const orderByEndDateDesc = () => {
   const storedTaskList = JSON.parse(localStorage.getItem('taskList'));
 
   const orderedTasksDesc = storedTaskList.sort((taskA, taskB) =>  {
-    if (taskA.endDate > taskB.endDate) {
-      return 1;
-    }
-    if (taskA.endDate < taskB.endDate) {
+    if (convertToOrdenableDate(taskA.endDate) > convertToOrdenableDate(taskB.endDate)) {
       return -1;
+    }
+    if (convertToOrdenableDate(taskA.endDate) < convertToOrdenableDate(taskB.endDate)) {
+      return 1;
     }
   });
 
