@@ -19,7 +19,11 @@ const setCurrentDate = () => {
 const actionEventsListener = () => {
   const addButton = document.getElementById('add-task');
   const clearListButton = document.getElementById('clear-task-list');
-  
+  const taskInput = document.getElementById('task');
+  const endDate = document.getElementById('task-end-date');
+
+  endDate.addEventListener('input', validateFields);
+  taskInput.addEventListener('input', validateFields);
   addButton.addEventListener('click', addTask);
   clearListButton.addEventListener('click', clearList);
 };
@@ -188,3 +192,16 @@ const getStoredTaskList = () => {
     );
   };
 };
+
+
+const validateFields = () => {
+  const addButton = document.getElementById('add-task');
+  const task = document.getElementById('task').value;
+  const endDate = document.getElementById('task-end-date').value;
+
+  if (!task || !endDate) {
+    addButton.setAttribute('disabled', true)
+  } else {
+    addButton.removeAttribute('disabled')
+  }
+}
