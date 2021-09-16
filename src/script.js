@@ -55,6 +55,7 @@ const addTask = () => {
 
   taskList.appendChild(taskRow);
 
+  storeTaskList(task, startDate, endDate, taskStatus);
   clearTaskForm();
 }
 
@@ -64,4 +65,20 @@ const clearList = () => {
   while (taskList.firstChild) {
     taskList.removeChild(taskList.firstChild);
   }
+}
+
+const storeTaskList = () => {
+  const taskList = document.getElementById('task-list');
+  const taskListStore = [];
+
+  for (let indexRow = 0; indexRow < taskList.childElementCount; indexRow += 1) {
+    taskListStore.push({
+      task: taskList.children[indexRow].children[0].innerHTML,
+      startDate: taskList.children[indexRow].children[1].innerHTML,
+      endDate: taskList.children[indexRow].children[2].innerHTML,
+      taskStatus: taskList.children[indexRow].children[3].innerHTML,
+    })
+  }
+
+  localStorage.setItem("taskList", JSON.stringify(taskListStore));
 }
