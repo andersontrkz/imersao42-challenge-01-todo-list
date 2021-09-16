@@ -19,7 +19,7 @@ const setCurrentDate = () => {
 const actionEventsListener = () => {
   const addButton = document.getElementById('add-task');
   const clearListButton = document.getElementById('clear-task-list');
-
+  
   addButton.addEventListener('click', addTask);
   clearListButton.addEventListener('click', clearList);
 };
@@ -123,16 +123,24 @@ const clearTaskForm = () => {
   endDateInput.value = '';
 };
 
+const dateConverter = (date) => {
+  const [year, month , day] = date.split("-");
+
+  return `${day}/${month}/${year}`;
+}
+
 const addTask = () => {
   const task = document.getElementById('task').value;
   const startDate = document.getElementById('task-start-date').value;
   const endDate = document.getElementById('task-end-date').value;
   const taskStatus = document.getElementById('task-status').value;
 
+  const convertedDate = dateConverter(endDate);
+
   generateTaskList(
     task,
     startDate,
-    endDate,
+    convertedDate,
     taskStatus
   )
 
