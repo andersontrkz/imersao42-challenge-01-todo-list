@@ -31,15 +31,29 @@ const clearTaskForm = () => {
 
 const addTask = () => {
   const taskList = document.getElementById('task-list');
-  const newTask = document.createElement("li");
-  const text = document.getElementById('task').value;
+  const taskRow = document.createElement("tr");
 
-  const textTask = document.createTextNode(text);  
+  const task = document.getElementById('task').value;
+  const startDate = document.getElementById('task-start-date').value;
+  const endDate = document.getElementById('task-end-date').value;
+  const taskStatus = document.getElementById('task-status').value;
 
-  newTask.appendChild(textTask);
-  newTask.setAttribute('class', 'task');
+  const taskColumn = document.createElement("td");
+  const startDateColumn = document.createElement("td");
+  const endDateColumn = document.createElement("td");
+  const taskStatusColumn = document.createElement("td");
 
-  taskList.appendChild(newTask);
+  taskColumn.innerHTML = task;
+  startDateColumn.innerHTML = startDate;
+  endDateColumn.innerHTML = endDate;
+  taskStatusColumn.innerHTML = taskStatus; 
+
+  taskRow.appendChild(taskColumn);
+  taskRow.appendChild(startDateColumn);
+  taskRow.appendChild(endDateColumn);
+  taskRow.appendChild(taskStatusColumn);
+
+  taskList.appendChild(taskRow);
 
   clearTaskForm();
 }
