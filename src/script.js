@@ -21,7 +21,11 @@ const actionEventsListener = () => {
   const clearListButton = document.getElementById('clear-task-list');
   const taskInput = document.getElementById('task');
   const endDate = document.getElementById('task-end-date');
+  const orderAscButton = document.getElementById('order-asc-task-list');
+  const orderDescButton = document.getElementById('order-desc-task-list');
 
+  orderAscButton.addEventListener('click', orderByEndDateAsc);
+  orderDescButton.addEventListener('click', orderByEndDateDesc);
   endDate.addEventListener('input', validateFields);
   taskInput.addEventListener('input', validateFields);
   addButton.addEventListener('click', addTask);
@@ -204,4 +208,49 @@ const validateFields = () => {
   } else {
     addButton.removeAttribute('disabled')
   }
+};
+
+const convertToOrdenableDate = (date) => {
+  const dataSplit = date.split("/");
+  const ordenableDate = new Date(
+    parseInt(dataSplit[2], 10),
+    parseInt(dataSplit[1], 10) - 1,
+    parseInt(dataSplit[0], 10)
+  );
+
+  return ordenableDate;
+}
+
+const orderByEndDateAsc = () => {
+  const storedTaskList = JSON.parse(localStorage.getItem('taskList'));
+
+  const orderedTasksAsc = storedTaskList.sort((taskA, taskB) =>  {
+    if (taskA.endDate > taskB.endDate) {
+      return -1;
+    }
+    if (taskA.endDate < taskB.endDate) {
+      return 1;
+    }
+  });
+
+  localStorage.setItem('taskList', JSON.stringify(orderedTasksAsc));
+
+  location.reload();
+}
+
+const orderByEndDateDesc = () => {
+  const storedTaskList = JSON.parse(localStorage.getItem('taskList'));
+
+  const orderedTasksDesc = storedTaskList.sort((taskA, taskB) =>  {
+    if (taskA.endDate > taskB.endDate) {
+      return 1;
+    }
+    if (taskA.endDate < taskB.endDate) {
+      return -1;
+    }
+  });
+
+  localStorage.setItem('taskList', JSON.stringify(orderedTasksDesc));
+
+  location.reload();
 }
