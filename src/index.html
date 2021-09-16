@@ -12,10 +12,19 @@
     </header>
     
     <main>
-      <input placeholder="Atividade" type="text" name="task" id="task">
-      <input placeholder="Data de ínicio" type="text" name="task-start-date" id="task-start-date" disabled>
-      <input placeholder="Data limite de conclusão" type="text" name="task-end-date" id="task-end-date">
-      <input placeholder="Status" value="Incompleto" type="text" name="task-status" id="task-status">
+      <form>
+        <label for="task">Atividade</label>
+        <input type="text" name="task" id="task">
+        <label for="task-start-date">Data de Início</label>
+        <input type="text" name="task-start-date" id="task-start-date" disabled>
+        <label for="task-end-date">Data Limite de Término</label>
+        <input type="text" name="task-end-date" id="task-end-date">
+        <label for="task-status">Status</label>
+        <select name="task-status" id="task-status">
+          <option value="Incompleto">Incompleto</option>
+          <option value="Incompleto">Completo</option>
+        </select>
+      </form>
       
       <button id="add-task">Adicionar</button>
       <button id="clear-task-list">Limpar lista</button>
