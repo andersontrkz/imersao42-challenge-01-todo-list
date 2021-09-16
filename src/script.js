@@ -1,7 +1,9 @@
 window.onload = () => {
   const addButton = document.getElementById('add-task');
+  const clearListButton = document.getElementById('clear-task-list');
   
   addButton.addEventListener('click', addTask);
+  clearListButton.addEventListener('click', clearList);
 
   setCurrentDate();
 
@@ -17,7 +19,17 @@ const setCurrentDate = () => {
   startDateInput.value = `${day}/${month}/${year}`;
 }
 
-function addTask () {
+const clearTaskForm = () => {
+  const taskInput = document.getElementById('task');
+  const taskStatus = document.getElementById('task-status');
+  const endDateInput = document.getElementById('task-end-date');
+
+  taskInput.value = '';
+  taskStatus.value = 'Incompleto';
+  endDateInput.value = '';
+}
+
+const addTask = () => {
   const taskList = document.getElementById('task-list');
   const newTask = document.createElement("li");
   const text = document.getElementById('task').value;
@@ -32,12 +44,10 @@ function addTask () {
   clearTaskForm();
 }
 
-function clearTaskForm() {
-  const taskInput = document.getElementById('task');
-  const taskStatus = document.getElementById('task-status');
-  const endDateInput = document.getElementById('task-end-date');
+const clearList = () => {
+  const taskList = document.getElementById('task-list');
 
-  taskInput.value = '';
-  taskStatus.value = 'Incompleto';
-  endDateInput.value = '';
+  while (taskList.firstChild) {
+    taskList.removeChild(taskList.firstChild);
+  }
 }
