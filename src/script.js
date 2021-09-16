@@ -1,11 +1,7 @@
 window.onload = () => {
   getStoredTaskList();
 
-  const addButton = document.getElementById('add-task');
-  const clearListButton = document.getElementById('clear-task-list');
-  
-  addButton.addEventListener('click', addTask);
-  clearListButton.addEventListener('click', clearList);
+  actionEventsListener();
 
   setCurrentDate();
 };
@@ -18,6 +14,56 @@ const setCurrentDate = () => {
   const startDateInput = document.getElementById('task-start-date');
 
   startDateInput.value = `${day}/${month}/${year}`;
+};
+
+const actionEventsListener = () => {
+  const addButton = document.getElementById('add-task');
+  const clearListButton = document.getElementById('clear-task-list');
+  const deleteButtons = document.getElementsByClassName('delete-task');
+
+  Array.from(deleteButtons).forEach((deleteButton) => {
+    deleteButton.addEventListener('click', () => deleteTask(deleteButton));
+  });
+
+  addButton.addEventListener('click', addTask);
+  clearListButton.addEventListener('click', clearList);
+};
+
+const deleteTask = (deleteButton) => {
+  const row = deleteButton.parentNode.parentNode;
+
+  deleteButton.parentNode.parentNode.parentNode.removeChild(row);
+
+  storeTaskList();
+};
+
+const moveUpTask = () => {
+  
+};
+
+const moveDownTask = () => {
+  
+};
+
+const generateActionColumn = () => {
+  const actionColumn = document.createElement('td');
+  const moveUp = document.createElement('button');
+  const moveDown = document.createElement('button');
+  const deleteButton = document.createElement('button');
+
+  moveUp.innerText = '⏫';
+  moveDown.innerText = '⏬';
+  deleteButton.innerText = '⛔';
+
+  moveUp.classList.add("move-up-task");
+  moveDown.classList.add("move-down-task");
+  deleteButton.classList.add("delete-task");
+
+  actionColumn.appendChild(moveUp);
+  actionColumn.appendChild(moveDown);
+  actionColumn.appendChild(deleteButton);
+
+  return actionColumn;
 };
 
 const generateTaskList = (task, startDate, endDate, taskStatus) => {
@@ -38,8 +84,10 @@ const generateTaskList = (task, startDate, endDate, taskStatus) => {
   taskRow.appendChild(endDateColumn);
   taskRow.appendChild(taskStatusColumn);
 
+  taskRow.appendChild(generateActionColumn());
+
   taskList.appendChild(taskRow);
-}
+};
 
 const clearTaskForm = () => {
   const taskInput = document.getElementById('task');
@@ -64,7 +112,7 @@ const addTask = () => {
     taskStatus
   )
 
-  storeTaskList(task, startDate, endDate, taskStatus);
+  storeTaskList();
   clearTaskForm();
 };
 
@@ -74,6 +122,8 @@ const clearList = () => {
   while (taskList.firstChild) {
     taskList.removeChild(taskList.firstChild);
   };
+
+  storeTaskList();
 };
 
 const storeTaskList = () => {
