@@ -20,25 +20,9 @@ const setCurrentDate = () => {
   startDateInput.value = `${day}/${month}/${year}`;
 };
 
-const clearTaskForm = () => {
-  const taskInput = document.getElementById('task');
-  const taskStatus = document.getElementById('task-status');
-  const endDateInput = document.getElementById('task-end-date');
-
-  taskInput.value = '';
-  taskStatus.value = 'Incompleto';
-  endDateInput.value = '';
-};
-
-const addTask = () => {
+const generateTaskList = (task, startDate, endDate, taskStatus) => {
   const taskList = document.getElementById('task-list');
   const taskRow = document.createElement("tr");
-
-  const task = document.getElementById('task').value;
-  const startDate = document.getElementById('task-start-date').value;
-  const endDate = document.getElementById('task-end-date').value;
-  const taskStatus = document.getElementById('task-status').value;
-
   const taskColumn = document.createElement("td");
   const startDateColumn = document.createElement("td");
   const endDateColumn = document.createElement("td");
@@ -55,6 +39,30 @@ const addTask = () => {
   taskRow.appendChild(taskStatusColumn);
 
   taskList.appendChild(taskRow);
+}
+
+const clearTaskForm = () => {
+  const taskInput = document.getElementById('task');
+  const taskStatus = document.getElementById('task-status');
+  const endDateInput = document.getElementById('task-end-date');
+
+  taskInput.value = '';
+  taskStatus.value = 'Incompleto';
+  endDateInput.value = '';
+};
+
+const addTask = () => {
+  const task = document.getElementById('task').value;
+  const startDate = document.getElementById('task-start-date').value;
+  const endDate = document.getElementById('task-end-date').value;
+  const taskStatus = document.getElementById('task-status').value;
+
+  generateTaskList(
+    task,
+    startDate,
+    endDate,
+    taskStatus
+  )
 
   storeTaskList(task, startDate, endDate, taskStatus);
   clearTaskForm();
@@ -89,25 +97,12 @@ const getStoredTaskList = () => {
   
   if (!storedTaskList) return;
   
-  const taskList = document.getElementById('task-list');
-  
   for (let index = 0; index < storedTaskList.length; index += 1) {
-    const taskRow = document.createElement("tr");
-    const taskColumn = document.createElement("td");
-    const startDateColumn = document.createElement("td");
-    const endDateColumn = document.createElement("td");
-    const taskStatusColumn = document.createElement("td");
-
-    taskColumn.innerHTML = storedTaskList[index].task;
-    startDateColumn.innerHTML = storedTaskList[index].startDate;
-    endDateColumn.innerHTML = storedTaskList[index].endDate;
-    taskStatusColumn.innerHTML = storedTaskList[index].taskStatus; 
-
-    taskRow.appendChild(taskColumn);
-    taskRow.appendChild(startDateColumn);
-    taskRow.appendChild(endDateColumn);
-    taskRow.appendChild(taskStatusColumn);
-
-    taskList.appendChild(taskRow);
+    generateTaskList(
+      storedTaskList[index].task,
+      storedTaskList[index].startDate,
+      storedTaskList[index].endDate,
+      storedTaskList[index].taskStatus
+    );
   };
 };
