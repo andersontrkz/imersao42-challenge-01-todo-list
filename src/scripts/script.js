@@ -9,7 +9,7 @@ window.onload = () => {
     allow_duplicates: false,
     allow_spaces: true,
     add_on_blur: true,
-    tag_limit: 5,
+    tag_limit: 4,
     completion: {list: ['foo', 'bar', 'baz']}
   });
   var t2 = tagger(document.querySelector('[name="tags2"]'), {
@@ -33,7 +33,7 @@ const task_list = document.getElementById('task-list');
 const setCurrentDate = () => {
   const startDateInput = document.getElementById('task-start-date');
 
-  startDateInput.value = new Date().toLocaleDateString();
+  startDateInput.value = new Date().toISOString().split('T')[0];;
 };
 
 const actionEventsListener = () => {
