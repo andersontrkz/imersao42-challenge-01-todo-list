@@ -4,7 +4,28 @@ window.onload = () => {
   actionEventsListener();
 
   setCurrentDate();
-};
+
+  var t1 = tagger(document.querySelector('[name="tags"]'), {
+    allow_duplicates: false,
+    allow_spaces: true,
+    add_on_blur: true,
+    tag_limit: 10,
+    completion: {list: ['foo', 'bar', 'baz']}
+  });
+  var t2 = tagger(document.querySelector('[name="tags2"]'), {
+      allow_duplicates: false,
+      allow_spaces: true,
+      completion: {
+          list: function() {
+              return Promise.resolve(['foo', 'bar', 'baz', 'foo-baz']);
+          }
+      },
+  });
+  var t3 = tagger(document.querySelectorAll('[name^="tags3"]'), {
+      allow_duplicates: false,
+      allow_spaces: true,
+  });
+  };
 
 let taskObject = {};
 const task_list = document.getElementById('task-list');
@@ -269,3 +290,4 @@ const orderByEndDateDesc = () => {
 
   location.reload();
 }
+

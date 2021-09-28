@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
-  <link rel="stylesheet" href="style.css">
+    <link href="styles/style.css" rel="stylesheet">
+    <link href="styles/task-tagger.css" rel="stylesheet">
   </head>
   <body>
     <main class="main__content">
@@ -33,6 +34,10 @@
                 <option value="Incompleto">Completo</option>
               </select>
             </div>
+            <div class="main-form__tagger">
+              <label for="task-tagger">Tags (máx. 10)</label><br>
+              <input type="text" name="tags" id="task-tagger"/>
+            </div>
             <div class="main-form__add-button">
               <button id="add-task" disabled>Adicionar</button>
             </div>
@@ -49,5 +54,6 @@
         </section>
     </main>
   </body>
-  <script src="script.js"></script>
+  <script src="scripts/script.js"></script>
+  <script src="scripts/task-tagger.js"></script>
 </html>
