@@ -136,31 +136,35 @@ const setActionColumnEvents = (taskList) => {
   () => deleteTask(lastColumn));
 };
 
-const generateTaskList = ({ task, startDate, endDate, taskStatus, tags }) => {
+const generateTaskList = ({ task, startDate, endDate, taskStatus, tags, priority }) => {
   const taskCard = document.createElement("main");
   const taskSection = document.createElement("section");
   const startDateSection = document.createElement("section");
   const endDateSection = document.createElement("section");
   const statusSection = document.createElement("section");
   const tagsSection = document.createElement("section");
+  const prioritySection = document.createElement("section");
 
   taskSection.innerHTML = task;
   startDateSection.innerHTML = startDate;
   endDateSection.innerHTML = endDate;
-  statusSection.innerHTML = taskStatus; 
-  tagsSection.innerHTML = tags; 
+  statusSection.innerHTML = taskStatus;
+  tagsSection.innerHTML = tags;
+  prioritySection.innerHTML = priority;
 
   taskSection.className = 'task-card__task-section';
   startDateSection.className = 'task-card__start-date-section';
   endDateSection.className = 'task-card__end-date-section';
   statusSection.className = 'task-card__status-section';
   tagsSection.className = 'task-card__tags-section';
+  prioritySection.className = 'task-card__prioriry-section';
 
   taskCard.appendChild(taskSection);
   taskCard.appendChild(startDateSection);
   taskCard.appendChild(endDateSection);
   taskCard.appendChild(statusSection);
   taskCard.appendChild(tagsSection);
+  taskCard.appendChild(prioritySection);
 
   taskCard.appendChild(generateActionColumn());
 
@@ -195,6 +199,7 @@ const addTask = () => {
   taskObject.taskStatus = document.getElementById('task-status').value;
   taskObject.startDate = document.getElementById('task-start-date').value;
   taskObject.endDate = endDateConverter(endDate);
+  taskObject.priority = document.getElementById('task-priority').value;
   taskObject.tags = document.getElementById('task-tagger').value;
   
   generateTaskList(taskObject);
@@ -222,6 +227,8 @@ const storeTaskList = () => {
       startDate: task_list.children[index].children[1].innerHTML,
       endDate: task_list.children[index].children[2].innerHTML,
       taskStatus: task_list.children[index].children[3].innerHTML,
+      priority: task_list.children[index].children[4].innerHTML,
+      tags: task_list.children[index].children[5].innerHTML,
     });
   };
 
@@ -238,6 +245,8 @@ const getStoredTaskList = () => {
     taskObject.startDate = storedTaskList[index].startDate;
     taskObject.endDate = storedTaskList[index].endDate;
     taskObject.taskStatus = storedTaskList[index].taskStatus;
+    taskObject.priority = storedTaskList[index].priority;
+    taskObject.tags = storedTaskList[index].tags;
 
     generateTaskList(taskObject);
   };

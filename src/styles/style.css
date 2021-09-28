@@ -24,7 +24,8 @@ button, select, input {
 .main-form__end-date { grid-area: main; }
 .main-form__status { grid-area: right; }
 .main-form__add-button {grid-area: footer; }
-.main-form__tagger {grid-area: tagger; }
+.main-form__tagger { grid-area: tagger; }
+.main-form__prioriry { grid-area: prioriry; }
 .main-form__task input {
   width: 80%;
 }
@@ -36,7 +37,7 @@ button, select, input {
   display: grid;
   grid-template-areas:
     'left header header menu main right'
-    'left tagger tagger tagger tagger tagger'
+    'left tagger tagger tagger tagger prioriry'
     'left footer footer footer footer footer';
   grid-gap: 8px;
   margin: 12px auto;
@@ -64,6 +65,7 @@ button, select, input {
 .task-card__status-section { grid-area: right; }
 .task-card__action-section { grid-area: footer; }
 .task-card__tagger-section { grid-area: tagger; }
+.task-card__priority-section { grid-area: priority; }
 .task-card__action-section {
   display: flex;
   justify-content: space-between;
@@ -76,7 +78,7 @@ button, select, input {
   display: grid;
   grid-template-areas:
     'header header header menu main right'
-    'tagger tagger tagger tagger tagger tagger'
+    'priority tagger tagger tagger tagger tagger'
     'footer footer footer footer footer footer';
   grid-gap: 8px;
 }
