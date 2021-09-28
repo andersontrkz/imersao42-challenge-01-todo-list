@@ -65,14 +65,14 @@ button, select, input {
   justify-content: space-between;
 }
 .task-card__action-section button {
-  width: 20%;
+  width: 24%;
 }
 
 .task-card__main {
   display: grid;
   grid-template-areas:
-    'header header header header header header'
-    'menu main main main right right'
+    'header header header menu main right'
+    /* 'menu main main main right right' */
     'footer footer footer footer footer footer';
   grid-gap: 8px;
 }
@@ -87,4 +87,10 @@ button, select, input {
 }
 .task-card__task-section {
   font-weight: 600;
+}
+
+.task-card__selected {
+  background-color: rgb(0, 100, 100);
+  color: aliceblue;
+  transition: .9s;
 }

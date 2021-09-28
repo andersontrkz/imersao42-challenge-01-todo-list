@@ -32,9 +32,22 @@ const actionEventsListener = () => {
 };
 
 const deleteTask = (deleteButton) => {
-  const row = deleteButton.parentNode.parentNode;
+  const card = deleteButton.parentNode.parentNode;
 
-  deleteButton.parentNode.parentNode.parentNode.removeChild(row);
+  deleteButton.parentNode.parentNode.parentNode.removeChild(card);
+
+  storeTaskList();
+};
+
+const editTask = (editButton) => {
+  const card = editButton.parentNode.parentNode;
+  const task = card.firstChild.innerText;
+  const startDate = card.firstChild.innerText;
+  const endDate = card.firstChild.innerText;
+  const status = card.firstChild.innerText;
+  console.log(status)
+
+  card.classList.add("task-card__selected");
 
   storeTaskList();
 };
@@ -63,18 +76,22 @@ const generateActionColumn = () => {
   const actionSection = document.createElement('section');
   const moveUp = document.createElement('button');
   const moveDown = document.createElement('button');
+  const editButton = document.createElement('button');
   const deleteButton = document.createElement('button');
 
-  moveUp.innerText = '⏫';
-  moveDown.innerText = '⏬';
-  deleteButton.innerText = '⛔';
+  moveUp.innerText = '⏫ Mover para cima';
+  moveDown.innerText = '⏬ Mover para baixo';
+  editButton.innerText = '📝 Editar atividade';
+  deleteButton.innerText = '⛔ Excluir atividade';
 
   moveUp.classList.add("move-up-task");
   moveDown.classList.add("move-down-task");
+  editButton.classList.add("edit-task");
   deleteButton.classList.add("delete-task");
 
   actionSection.appendChild(moveUp);
   actionSection.appendChild(moveDown);
+  actionSection.appendChild(editButton);
   actionSection.appendChild(deleteButton);
 
   actionSection.className = 'task-card__action-section';
@@ -88,8 +105,11 @@ const setActionColumnEvents = (taskList) => {
   taskList.lastChild.lastChild.firstChild.addEventListener('click',
   () => moveUpTask(lastColumn));
 
-  taskList.lastChild.lastChild.lastChild.previousSibling.addEventListener('click',
+  taskList.lastChild.lastChild.lastChild.previousSibling.previousSibling.addEventListener('click',
   () => moveDownTask(lastColumn));
+
+  taskList.lastChild.lastChild.lastChild.previousSibling.addEventListener('click',
+  () => editTask(lastColumn));
 
   taskList.lastChild.lastChild.lastChild.addEventListener('click',
   () => deleteTask(lastColumn));
