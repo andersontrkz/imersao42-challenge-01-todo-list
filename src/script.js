@@ -6,6 +6,8 @@ window.onload = () => {
   setCurrentDate();
 };
 
+let taskObject = {};
+
 const setCurrentDate = () => {
   const startDateInput = document.getElementById('task-start-date');
 
@@ -92,7 +94,7 @@ const setActionColumnEvents = (taskList) => {
   () => deleteTask(lastColumn));
 };
 
-const generateTaskList = (task, startDate, endDate, taskStatus) => {
+const generateTaskList = ({ task, startDate, endDate, taskStatus }) => {
   const taskList = document.getElementById('task-list');
   const taskRow = document.createElement("tr");
   const taskColumn = document.createElement("td");
@@ -133,22 +135,16 @@ const endDateConverter = (date) => {
   return `${day}/${month}/${year}`;
 }
 
-const addTask = () => {
+const addTask = () => {  
   const addButton = document.getElementById('add-task');
-  const task = document.getElementById('task').value;
-  const startDate = document.getElementById('task-start-date').value;
   const endDate = document.getElementById('task-end-date').value;
-  const taskStatus = document.getElementById('task-status').value;
+  
+  taskObject.task = document.getElementById('task').value;
+  taskObject.taskStatus = document.getElementById('task-status').value;
+  taskObject.startDate = document.getElementById('task-start-date').value;
+  taskObject.endDate = endDateConverter(endDate);
 
-  const convertedStartDate = startDate;
-  const convertedEndDate = endDateConverter(endDate);
-
-  generateTaskList(
-    task,
-    convertedStartDate,
-    convertedEndDate,
-    taskStatus
-  )
+  generateTaskList(taskObject);
 
   storeTaskList();
   clearTaskForm();
@@ -188,12 +184,12 @@ const getStoredTaskList = () => {
   if (!storedTaskList) return;
   
   for (let index = 0; index < storedTaskList.length; index += 1) {
-    generateTaskList(
-      storedTaskList[index].task,
-      storedTaskList[index].startDate,
-      storedTaskList[index].endDate,
-      storedTaskList[index].taskStatus
-    );
+    taskObject.task = storedTaskList[index].task;
+    taskObject.startDate = storedTaskList[index].startDate;
+    taskObject.endDate = storedTaskList[index].endDate;
+    taskObject.taskStatus = storedTaskList[index].taskStatus;
+
+    generateTaskList(taskObject);
   };
 };
 
