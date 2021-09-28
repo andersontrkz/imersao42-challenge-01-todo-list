@@ -63,6 +63,7 @@ button, select, input {
 .task-card__end-date-section { grid-area: main; }
 .task-card__status-section { grid-area: right; }
 .task-card__action-section { grid-area: footer; }
+.task-card__tagger-section { grid-area: tagger; }
 .task-card__action-section {
   display: flex;
   justify-content: space-between;
@@ -75,7 +76,7 @@ button, select, input {
   display: grid;
   grid-template-areas:
     'header header header menu main right'
-    /* 'menu main main main right right' */
+    'tagger tagger tagger tagger tagger tagger'
     'footer footer footer footer footer footer';
   grid-gap: 8px;
 }

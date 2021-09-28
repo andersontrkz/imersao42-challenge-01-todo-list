@@ -22,7 +22,6 @@
     display: flex;
     width: 100%;
     align-items: center;
-    padding: 4px 0;
     justify-content: space-between;
     box-sizing: border-box;
     height: auto;
@@ -44,7 +43,7 @@
 .tagger > ul > li:not(.tagger-new) > a,
 .tagger li:not(.tagger-new) > span,
 .tagger .tagger-new ul {
-    padding: 4px 4px 4px 8px;
+    padding: 1px 4px 1px 8px;
     background: #B1C3D7;
     border: 1px solid #4181ed;
     border-radius: 3px;

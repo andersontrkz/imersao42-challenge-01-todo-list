@@ -136,27 +136,31 @@ const setActionColumnEvents = (taskList) => {
   () => deleteTask(lastColumn));
 };
 
-const generateTaskList = ({ task, startDate, endDate, taskStatus }) => {
+const generateTaskList = ({ task, startDate, endDate, taskStatus, tags }) => {
   const taskCard = document.createElement("main");
   const taskSection = document.createElement("section");
   const startDateSection = document.createElement("section");
   const endDateSection = document.createElement("section");
   const statusSection = document.createElement("section");
+  const tagsSection = document.createElement("section");
 
   taskSection.innerHTML = task;
   startDateSection.innerHTML = startDate;
   endDateSection.innerHTML = endDate;
   statusSection.innerHTML = taskStatus; 
+  tagsSection.innerHTML = tags; 
 
   taskSection.className = 'task-card__task-section';
   startDateSection.className = 'task-card__start-date-section';
   endDateSection.className = 'task-card__end-date-section';
   statusSection.className = 'task-card__status-section';
+  tagsSection.className = 'task-card__tags-section';
 
   taskCard.appendChild(taskSection);
   taskCard.appendChild(startDateSection);
   taskCard.appendChild(endDateSection);
   taskCard.appendChild(statusSection);
+  taskCard.appendChild(tagsSection);
 
   taskCard.appendChild(generateActionColumn());
 
@@ -191,7 +195,8 @@ const addTask = () => {
   taskObject.taskStatus = document.getElementById('task-status').value;
   taskObject.startDate = document.getElementById('task-start-date').value;
   taskObject.endDate = endDateConverter(endDate);
-
+  taskObject.tags = document.getElementById('task-tagger').value;
+  
   generateTaskList(taskObject);
 
   storeTaskList();
