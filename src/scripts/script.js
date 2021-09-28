@@ -9,7 +9,7 @@ window.onload = () => {
     allow_duplicates: false,
     allow_spaces: true,
     add_on_blur: true,
-    tag_limit: 10,
+    tag_limit: 5,
     completion: {list: ['foo', 'bar', 'baz']}
   });
   var t2 = tagger(document.querySelector('[name="tags2"]'), {
@@ -149,22 +149,22 @@ const generateTaskList = ({ task, startDate, endDate, taskStatus, tags, priority
   startDateSection.innerHTML = startDate;
   endDateSection.innerHTML = endDate;
   statusSection.innerHTML = taskStatus;
-  tagsSection.innerHTML = tags;
   prioritySection.innerHTML = priority;
+  tagsSection.innerHTML = tags;
 
   taskSection.className = 'task-card__task-section';
   startDateSection.className = 'task-card__start-date-section';
   endDateSection.className = 'task-card__end-date-section';
   statusSection.className = 'task-card__status-section';
-  tagsSection.className = 'task-card__tags-section';
   prioritySection.className = 'task-card__prioriry-section';
+  tagsSection.className = 'task-card__tags-section';
 
   taskCard.appendChild(taskSection);
   taskCard.appendChild(startDateSection);
   taskCard.appendChild(endDateSection);
   taskCard.appendChild(statusSection);
-  taskCard.appendChild(tagsSection);
   taskCard.appendChild(prioritySection);
+  taskCard.appendChild(tagsSection);
 
   taskCard.appendChild(generateActionColumn());
 
@@ -178,11 +178,15 @@ const generateTaskList = ({ task, startDate, endDate, taskStatus, tags, priority
 const clearTaskForm = () => {
   const taskInput = document.getElementById('task');
   const taskStatus = document.getElementById('task-status');
+  const taskPrioriry = document.getElementById('task-priority');
   const endDateInput = document.getElementById('task-end-date');
+  const taskTagger = document.querySelectorAll('[name="tags1"]')[0]
 
   taskInput.value = '';
   taskStatus.value = 'Incompleto';
+  taskPrioriry.value = 'Indiferente';
   endDateInput.value = '';
+  taskTagger.value = '';
 };
 
 const endDateConverter = (date) => {
