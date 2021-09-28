@@ -1,114 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
-  font-family: 'Roboto', sans-serif;                                                                               
+  font-family: 'Roboto', sans-serif;
+  font-size: large;
 }
 
 body {
   background-image: url('https://wallpaperaccess.com/full/3490461.jpg');
 }
 
-input, select {
-  border-radius: 8px;
-  padding: 4px;
+button, select, input {
+  border-radius: 6px;
+  padding: 3px 12px;
 }
 
-button {
-  border-radius: 8px;
-  padding: 8px 10px;
+.logo-todo-list {
+  max-width: 120px;
 }
-
-button:hover {
-  background-color: rgba(0, 0, 0, 0.185);
-  transition: .9s;
+.main-form__task { grid-area: header; }
+.main-form__logo { grid-area: left; }
+.main-form__start-date { grid-area: menu; }
+.main-form__end-date { grid-area: main; }
+.main-form__status { grid-area: right; }
+.main-form__add-button {grid-area: footer; }
+.main-form__task input {
+  width: 80%;
 }
-
-.main__content {
-  display: flex;
-}
-
-img {
-  align-self: center;
-  width: 80px;
-  margin-left: 50%;
-}
-
-.main__left * {
-  font-size: 1.2rem
-}
-
-.main__left {
-  display: flex;
-  border: rgba(0, 0, 0, 0.555) 1px solid;
-  border-radius: 16px;
-  width: 30%;
-  margin: 0 12px;
-  background-color: rgba(0, 0, 0, 0.03);
-  max-height: 70vh;
-}
-
-.main__left input, .main__left select, .main__left button {
+.main-form__add-button button {
   width: 100%;
 }
 
-.main__left input, .main__left select {
-  margin-bottom: 24px;
-}
-
-.main__left button {
-  margin-top: 32px;
-  margin-bottom: 32px;
-}
-
-.main__section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
-  padding-top: 32px;
-  max-height: 600px;
-}
-
-.main__right {
-  display: flex;
-  flex-direction: column;
-  border: rgba(0, 0, 0, 0.555) 1px solid;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-radius: 16px;
-  width: 70%;
+.main-form__container {
+  display: grid;
+  grid-template-areas:
+    'left header header menu main right'
+    'left footer footer footer footer footer';
+  grid-gap: 8px;
+  margin: 12px auto;
+  width: 88vw;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 24px 12px 12px 12px;
+  background-color: rgb(255, 255, 255);
 }
 
 .todo-list__action-buttons {
+  width: 88vw;
+  margin: 80px auto 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .todo-list__action-buttons button {
-  margin: 16px auto 16px;
-  font-size: large;
+  width: 33%;
 }
 
-.todo-list__action-buttons button:hover {
-  background-color: rgba(0, 0, 0, 0.185);
-  transition: .9s;
+.task-card__task-section { grid-area: header; }
+.task-card__start-date-section { grid-area: menu; }
+.task-card__end-date-section { grid-area: main; }
+.task-card__status-section { grid-area: right; }
+.task-card__action-section { grid-area: footer; }
+.task-card__action-section {
+  display: flex;
+  justify-content: space-between;
+}
+.task-card__action-section button {
+  width: 20%;
 }
 
-#task-list {
-  width: 100%;
-  padding: 0 8px 0 16px;
-  font-size: 16px;
-  float: right;
+.task-card__main {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right'
+    'footer footer footer footer footer footer';
+  grid-gap: 8px;
 }
 
-#task-list tr td {
-  width: 100%;
-  padding: 4px 16px;
+.task-card__main {
+  background-color: white;
+  margin: 12px auto;
+  padding: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  width: 88vw;
 }
-
-#task-list tr td button {
-  padding: 4px;
-  border-radius: 50%;
-  margin: 2px auto 2px;
+.task-card__task-section {
+  font-weight: 600;
 }

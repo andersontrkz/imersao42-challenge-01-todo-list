@@ -7,6 +7,7 @@ window.onload = () => {
 };
 
 let taskObject = {};
+const task_list = document.getElementById('task-list');
 
 const setCurrentDate = () => {
   const startDateInput = document.getElementById('task-start-date');
@@ -39,29 +40,27 @@ const deleteTask = (deleteButton) => {
 };
 
 const moveUpTask = (moveUpButton) => {
-  const taskList = document.getElementById('task-list');
   const row = moveUpButton.parentNode.parentNode;
 
-  if (row != taskList.firstChild) {
-    taskList.insertBefore(row, row.previousSibling);
+  if (row != task_list.firstChild) {
+    task_list.insertBefore(row, row.previousSibling);
   }
 
   storeTaskList();
 };
 
 const moveDownTask = (moveDownButton) => {
-  const taskList = document.getElementById('task-list');
   const row = moveDownButton.parentNode.parentNode;
 
-  if (row != taskList.lastChild) {
-    taskList.insertBefore(row, row.nextSibling.nextSibling);
+  if (row != task_list.lastChild) {
+    task_list.insertBefore(row, row.nextSibling.nextSibling);
   }
 
   storeTaskList();
 };
 
 const generateActionColumn = () => {
-  const actionColumn = document.createElement('td');
+  const actionSection = document.createElement('section');
   const moveUp = document.createElement('button');
   const moveDown = document.createElement('button');
   const deleteButton = document.createElement('button');
@@ -74,11 +73,13 @@ const generateActionColumn = () => {
   moveDown.classList.add("move-down-task");
   deleteButton.classList.add("delete-task");
 
-  actionColumn.appendChild(moveUp);
-  actionColumn.appendChild(moveDown);
-  actionColumn.appendChild(deleteButton);
+  actionSection.appendChild(moveUp);
+  actionSection.appendChild(moveDown);
+  actionSection.appendChild(deleteButton);
 
-  return actionColumn;
+  actionSection.className = 'task-card__action-section';
+
+  return actionSection;
 };
 
 const setActionColumnEvents = (taskList) => {
@@ -95,28 +96,34 @@ const setActionColumnEvents = (taskList) => {
 };
 
 const generateTaskList = ({ task, startDate, endDate, taskStatus }) => {
-  const taskList = document.getElementById('task-list');
-  const taskRow = document.createElement("tr");
-  const taskColumn = document.createElement("td");
-  const startDateColumn = document.createElement("td");
-  const endDateColumn = document.createElement("td");
-  const taskStatusColumn = document.createElement("td");
+  const taskCard = document.createElement("main");
+  const taskSection = document.createElement("section");
+  const startDateSection = document.createElement("section");
+  const endDateSection = document.createElement("section");
+  const statusSection = document.createElement("section");
 
-  taskColumn.innerHTML = task;
-  startDateColumn.innerHTML = startDate;
-  endDateColumn.innerHTML = endDate;
-  taskStatusColumn.innerHTML = taskStatus; 
+  taskSection.innerHTML = task;
+  startDateSection.innerHTML = startDate;
+  endDateSection.innerHTML = endDate;
+  statusSection.innerHTML = taskStatus; 
 
-  taskRow.appendChild(taskColumn);
-  taskRow.appendChild(startDateColumn);
-  taskRow.appendChild(endDateColumn);
-  taskRow.appendChild(taskStatusColumn);
+  taskSection.className = 'task-card__task-section';
+  startDateSection.className = 'task-card__start-date-section';
+  endDateSection.className = 'task-card__end-date-section';
+  statusSection.className = 'task-card__status-section';
 
-  taskRow.appendChild(generateActionColumn());
+  taskCard.appendChild(taskSection);
+  taskCard.appendChild(startDateSection);
+  taskCard.appendChild(endDateSection);
+  taskCard.appendChild(statusSection);
 
-  taskList.appendChild(taskRow);
+  taskCard.appendChild(generateActionColumn());
 
-  setActionColumnEvents(taskList);
+  taskCard.className = 'task-card__main';
+
+  task_list.appendChild(taskCard);
+
+  setActionColumnEvents(task_list);
 };
 
 const clearTaskForm = () => {
@@ -153,25 +160,22 @@ const addTask = () => {
 };
 
 const clearList = () => {
-  const taskList = document.getElementById('task-list');
-
-  while (taskList.firstChild) {
-    taskList.removeChild(taskList.firstChild);
+  while (task_list.firstChild) {
+    task_list.removeChild(task_list.firstChild);
   };
 
   storeTaskList();
 };
 
 const storeTaskList = () => {
-  const taskList = document.getElementById('task-list');
   const taskListStore = [];
 
-  for (let index = 0; index < taskList.childElementCount; index += 1) {
+  for (let index = 0; index < task_list.childElementCount; index += 1) {
     taskListStore.push({
-      task: taskList.children[index].children[0].innerHTML,
-      startDate: taskList.children[index].children[1].innerHTML,
-      endDate: taskList.children[index].children[2].innerHTML,
-      taskStatus: taskList.children[index].children[3].innerHTML,
+      task: task_list.children[index].children[0].innerHTML,
+      startDate: task_list.children[index].children[1].innerHTML,
+      endDate: task_list.children[index].children[2].innerHTML,
+      taskStatus: task_list.children[index].children[3].innerHTML,
     });
   };
 
