@@ -7,13 +7,9 @@ window.onload = () => {
 };
 
 const setCurrentDate = () => {
-  const day = new Date().getDay();
-  const month = new Date().getMonth();
-  const year = new Date().getFullYear();
-
   const startDateInput = document.getElementById('task-start-date');
 
-  startDateInput.value = `${day}/${month}/${year}`;
+  startDateInput.value = new Date().toLocaleDateString();
 };
 
 const actionEventsListener = () => {
@@ -137,15 +133,6 @@ const endDateConverter = (date) => {
   return `${day}/${month}/${year}`;
 }
 
-const startDateConverter = (date) => {
-  let [day, month , year] = date.split("/");
-
-  if (day.length < 10) day = `0${day}`;
-  if (month.length < 10) month = `0${month}`;
-
-  return `${day}/${month}/${year}`;
-}
-
 const addTask = () => {
   const addButton = document.getElementById('add-task');
   const task = document.getElementById('task').value;
@@ -153,7 +140,7 @@ const addTask = () => {
   const endDate = document.getElementById('task-end-date').value;
   const taskStatus = document.getElementById('task-status').value;
 
-  const convertedStartDate = startDateConverter(startDate);
+  const convertedStartDate = startDate;
   const convertedEndDate = endDateConverter(endDate);
 
   generateTaskList(
