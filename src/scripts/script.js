@@ -136,6 +136,20 @@ const setActionColumnEvents = (taskList) => {
   () => deleteTask(lastColumn));
 };
 
+const taggerCardGenerator = (tags) => {
+  if (tags[0] != '<') {
+    let string = ''
+  
+    tags.split(',').forEach(tag => {
+      string = string + `<div class="task-tagger__badge">${tag}</div>`;
+    });
+    
+    return string;
+  }
+
+  return tags;
+}
+
 const generateTaskList = ({ task, startDate, endDate, taskStatus, tags, priority }) => {
   const taskCard = document.createElement("main");
   const taskSection = document.createElement("section");
@@ -150,14 +164,14 @@ const generateTaskList = ({ task, startDate, endDate, taskStatus, tags, priority
   endDateSection.innerHTML = `<b>Término</b>: ${endDate}`;
   statusSection.innerHTML = `<b>Status</b>: ${taskStatus}`;
   prioritySection.innerHTML = `<b>Prioridade</b>: ${priority}`;
-  tagsSection.innerHTML = `<b>Tags</b>: ${tags}`;
+  tagsSection.innerHTML = `<b>Tags</b>: ${taggerCardGenerator(tags)}`;
 
   taskSection.className = 'task-card__task-section';
   startDateSection.className = 'task-card__start-date-section';
   endDateSection.className = 'task-card__end-date-section';
   statusSection.className = 'task-card__status-section';
   prioritySection.className = 'task-card__prioriry-section';
-  tagsSection.className = 'task-card__tags-section';
+  tagsSection.className = 'task-card__tagger-section';
 
   taskCard.appendChild(taskSection);
   taskCard.appendChild(startDateSection);
@@ -236,7 +250,7 @@ const storeTaskList = () => {
       tags: (task_list.children[index].children[5].innerHTML).split(': ')[1],
     });
   };
-
+  
   localStorage.setItem("taskList", JSON.stringify(taskListStore));
 };
 
