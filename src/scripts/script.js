@@ -52,12 +52,16 @@ const actionEventsListener = () => {
   clearListButton.addEventListener('click', clearList);
 };
 
-const deleteTask = (deleteButton) => {
-  const card = deleteButton.parentNode.parentNode;
+const deleteTask = async (deleteButton) => {
+  if (confirm('Deseja apagar esta atividade?')) {
+    const card = deleteButton.parentNode.parentNode;
 
-  deleteButton.parentNode.parentNode.parentNode.removeChild(card);
+    await deleteButton.parentNode.parentNode.parentNode.removeChild(card);
 
-  storeTaskList();
+    await storeTaskList();
+  } else {
+    alert('Ok, nenhuma ação foi feita!');
+  };
 };
 
 const editTask = (editButton) => {
