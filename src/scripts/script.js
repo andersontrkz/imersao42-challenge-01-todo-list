@@ -52,16 +52,18 @@ const actionEventsListener = () => {
   clearListButton.addEventListener('click', clearList);
 };
 
-const deleteTask = async (deleteButton) => {
+const deleteTask = (deleteButton) => {
   if (confirm('Deseja apagar esta atividade?')) {
     const card = deleteButton.parentNode.parentNode;
 
-    await deleteButton.parentNode.parentNode.parentNode.removeChild(card);
+    deleteButton.parentNode.parentNode.parentNode.removeChild(card);
 
-    await storeTaskList();
+    storeTaskList();
+
+    location.reload();
   } else {
     alert('Ok, nenhuma ação foi feita!');
-  };
+  }
 };
 
 const convertToGlobalDate = (date) => {
@@ -70,15 +72,58 @@ const convertToGlobalDate = (date) => {
   return new Date (`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`).toISOString().split('T')[0];
 }
 
+const reloadTagger = (tags) => {
+  const newTags = tags.split('<div class="task-tagger__badge">').join('-').split('</div>').join('-').split('-').filter((el) => el !== '');
+  const taggerParent = document.querySelector('.tagger').firstChild.nextSibling;
+  const taggerInput = document.getElementById('task-tagger');
+
+  while (!taggerParent.firstChild.classList.contains('tagger-new')) {
+    taggerParent.removeChild(taggerParent.firstChild);
+  };
+
+  taggerInput.value= newTags.join()
+  
+  const newElements = newTags.map((newTag) => {
+    let newLine = document.createElement('li');
+    let newSpan = document.createElement('span');
+    let newSubSpan = document.createElement('span');
+    let newCloseIcon = document.createElement('a');
+
+    newCloseIcon.setAttribute('class', 'close');
+    newCloseIcon.setAttribute('href', '#');
+    newCloseIcon.innerText = '×';
+
+    newSubSpan.innerText = `${newTag}`
+    newSubSpan.setAttribute('class', 'label');
+  
+    newSpan.setAttribute('href', `/tag/${newTag}`);
+    newSpan.setAttribute('target', '_black');
+    newSpan.appendChild(newSubSpan);
+    newSpan.appendChild(newCloseIcon);
+  
+    newLine.appendChild(newSpan);
+
+    return newLine;
+  })
+  
+  newElements.reverse().forEach((newElement) => {
+    taggerParent.insertBefore(newElement, taggerParent.firstChild);
+  })
+}
+
 const editTask = (editButton) => {
-  const cards = document.querySelectorAll('.task-card__main');
   const card = editButton.parentNode.parentNode;
+  if (card.classList.contains('task-card__selected')) return;
+
+  const cards = document.querySelectorAll('.task-card__main');
   const task = card.firstChild.innerText.split(': ')[1];
   const startDate = card.firstChild.nextSibling.innerText.split(': ')[1];
   const endDate = card.firstChild.nextSibling.nextSibling.innerText.split(': ')[1];
   const status = card.firstChild.nextSibling.nextSibling.nextSibling.innerText.split(': ')[1];
   const priority = card.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.innerText.split(': ')[1];
-  const tags = card.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.innerText.split(': ')[1];
+  const tags = card.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML.split(': ')[1];
+
+  reloadTagger(tags);
 
   const taskInput = document.getElementById('task');
   const taskStatusInput = document.getElementById('task-status');
@@ -94,7 +139,7 @@ const editTask = (editButton) => {
 
   const addButton = document.getElementById('add-task');
   addButton.removeAttribute('disabled');
-  addButton.innerText = 'Salvar';
+  addButton.innerText = '💾 Salvar';
 
   cards.forEach((c) => {
     if (c.classList.contains("task-card__selected")) {
@@ -268,7 +313,7 @@ const addTask = () => {
   taskObject.priority = document.getElementById('task-priority').value;
   taskObject.tags = document.getElementById('task-tagger').value;
   
-  if (addButton.innerText === 'Salvar') {
+  if (addButton.innerText === '💾 Salvar') {
     saveTask(taskObject);
   } else {
     generateTaskList(taskObject);
