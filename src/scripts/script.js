@@ -33,7 +33,7 @@ const task_list = document.getElementById('task-list');
 const setCurrentDate = () => {
   const startDateInput = document.getElementById('task-start-date');
 
-  startDateInput.value = new Date().toISOString().split('T')[0];;
+  startDateInput.value = new Date().toISOString().split('T')[0];
 };
 
 const actionEventsListener = () => {
@@ -64,17 +64,47 @@ const deleteTask = async (deleteButton) => {
   };
 };
 
+const convertToGlobalDate = (date) => {
+  const dateArray = date.split('/');
+
+  return new Date (`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`).toISOString().split('T')[0];
+}
+
 const editTask = (editButton) => {
+  const cards = document.querySelectorAll('.task-card__main');
   const card = editButton.parentNode.parentNode;
-  const task = card.firstChild.innerText;
-  const startDate = card.firstChild.innerText;
-  const endDate = card.firstChild.innerText;
-  const status = card.firstChild.innerText;
-  console.log(status)
+  const task = card.firstChild.innerText.split(': ')[1];
+  const startDate = card.firstChild.nextSibling.innerText.split(': ')[1];
+  const endDate = card.firstChild.nextSibling.nextSibling.innerText.split(': ')[1];
+  const status = card.firstChild.nextSibling.nextSibling.nextSibling.innerText.split(': ')[1];
+  const priority = card.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.innerText.split(': ')[1];
+  const tags = card.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.innerText.split(': ')[1];
+
+  const taskInput = document.getElementById('task');
+  const taskStatusInput = document.getElementById('task-status');
+  const taskPrioriryInput = document.getElementById('task-priority');
+  const endDateInput = document.getElementById('task-end-date');
+  const startDateInput = document.getElementById('task-start-date');
+
+  taskInput.value = task;
+  startDateInput.value = convertToGlobalDate(startDate);
+  endDateInput.value =  convertToGlobalDate(endDate);
+  taskStatusInput.value = status;
+  taskPrioriryInput.value = priority;
+
+  const addButton = document.getElementById('add-task');
+  addButton.removeAttribute('disabled');
+  addButton.innerText = 'Salvar';
+
+  cards.forEach((c) => {
+    if (c.classList.contains("task-card__selected")) {
+      c.classList.remove("task-card__selected");
+    };
+  });
 
   card.classList.add("task-card__selected");
 
-  storeTaskList();
+
 };
 
 const moveUpTask = (moveUpButton) => {
@@ -205,12 +235,25 @@ const clearTaskForm = () => {
   taskPrioriry.value = 'Indiferente';
   endDateInput.value = '';
   taskTagger.value = '';
+
+  setCurrentDate();
 };
 
 const dateFormatter = (date) => {
   const [year, month , day] = date.split("-");
 
   return `${day}/${month}/${year}`;
+}
+
+const saveTask = ({ task, startDate, endDate, taskStatus, tags, priority }) => {
+  const selectedCard = document.querySelector('.task-card__selected');
+
+  selectedCard.firstChild.innerHTML = `<b>Atividade</b>: ${task}`;
+  selectedCard.firstChild.nextSibling.innerHTML = `<b>Ínicio</b>: ${startDate}`;
+  selectedCard.firstChild.nextSibling.nextSibling.innerHTML = `<b>Término</b>: ${endDate}`;
+  selectedCard.firstChild.nextSibling.nextSibling.nextSibling.innerHTML = `<b>Status</b>: ${taskStatus}`;
+  selectedCard.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML = `<b>Prioridade</b>: ${priority}`;
+  selectedCard.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML = `<b>Tags</b>: ${taggerCardGenerator(tags)}`;
 }
 
 const addTask = () => {  
@@ -225,7 +268,11 @@ const addTask = () => {
   taskObject.priority = document.getElementById('task-priority').value;
   taskObject.tags = document.getElementById('task-tagger').value;
   
-  generateTaskList(taskObject);
+  if (addButton.innerText === 'Salvar') {
+    saveTask(taskObject);
+  } else {
+    generateTaskList(taskObject);
+  }
 
   storeTaskList();
   clearTaskForm();
