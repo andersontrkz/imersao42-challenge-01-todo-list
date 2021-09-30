@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+  font-size: large;
+}
+
+body {
+  background-image: url('https://64.media.tumblr.com/4473826397d286134aadd294bd816af7/tumblr_ntalo41wzy1qele20o1_r1_1280.gifv');
+}
+
+button, select, input {
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+
+select {
+  padding: 8px 12px;
+}
+
+.logo-todo-list {
+  max-width: 120px;
+}
+
+.main-form__task { grid-area: header; }
+.main-form__logo { grid-area: left; }
+.main-form__start-date { grid-area: menu; }
+.main-form__end-date { grid-area: main; }
+.main-form__status { grid-area: right; }
+.main-form__add-button {grid-area: footer; }
+.main-form__tagger { grid-area: tagger; }
+.main-form__prioriry { grid-area: prioriry; }
+.main-form__task input {
+  width: 80%;
+}
+.main-form__add-button button {
+  width: 100%;
+}
+
+.main-form__container {
+  display: grid;
+  grid-template-areas:
+    'left header header menu main right'
+    'left tagger tagger tagger tagger prioriry'
+    'left footer footer footer footer footer';
+  grid-gap: 8px;
+  margin: 12px auto;
+  width: 88vw;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 24px 12px 12px 12px;
+  background-color: rgb(255, 255, 255);
+}
+
+.todo-list__action-buttons {
+  width: 88vw;
+  margin: 80px auto 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo-list__action-buttons button {
+  width: 33%;
+}
+
+.task-card__task-section { grid-area: header; }
+.task-card__start-date-section { grid-area: menu; }
+.task-card__end-date-section { grid-area: main; }
+.task-card__status-section { grid-area: right; }
+.task-card__action-section {
+  display: flex;
+  justify-content: space-between;
+  grid-area: footer;
+}
+.task-card__tagger-section {
+  display: flex;
+  grid-area: tagger;
+}
+.task-card__priority-section { grid-area: priority; }
+.task-card__action-section button {
+  width: 24%;
+}
+
+.task-card__main {
+  display: grid;
+  grid-template-areas:
+    'header header header menu main right'
+    'priority tagger tagger tagger tagger tagger'
+    'footer footer footer footer footer footer';
+  grid-gap: 8px;
+}
+
+.task-card__main {
+  background-color: white;
+  margin: 12px auto;
+  padding: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  width: 88vw;
+}
+
+.task-card__selected {
+  background-color: rgb(251, 247, 180);
+  transition: .9s;
+}
+
+.task-tagger__badge {
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  margin: 0 4px;
+  padding: 0 8px;
+}

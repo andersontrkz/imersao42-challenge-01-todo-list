@@ -5,50 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
-  <link rel="stylesheet" href="style.css">
+    <link href="styles/style.css" rel="stylesheet">
+    <link href="styles/task-tagger.css" rel="stylesheet">
   </head>
   <body>
-    <header>
-      <img src="./images//logo-image.png" alt="logo-todo-list">
-    </header>
     <main class="main__content">
-      <main class="main__left">
         <section class="main__section">
-          <form>
-            <div>
+          <form  class="main-form__container">
+            <div class="main-form__logo">
+              <img src="./images/logo-image.png" alt="logo-todo-list" class="logo-todo-list">
+            </div>
+            <div class="main-form__task">
               <label for="task">Atividade</label><br>
               <input type="text" name="task" id="task">
             </div>
-            <div>
+            <div class="main-form__start-date">
               <label for="task-start-date">Data de Início</label><br>
-              <input type="text" name="task-start-date" id="task-start-date" disabled>
+              <input type="date" name="task-start-date" id="task-start-date" disabled>
             </div>
-            <div>
+            <div class="main-form__end-date">
               <label for="task-end-date">Data Limite de Término</label><br>
               <input type="date" name="task-end-date" id="task-end-date">
             </div>
-            <div>
+            <div class="main-form__status">
               <label for="task-status">Status</label><br>
               <select name="task-status" id="task-status">
                 <option value="Incompleto">Incompleto</option>
-                <option value="Incompleto">Completo</option>
+                <option value="Completo">Completo</option>
               </select>
             </div>
-            <button id="add-task" disabled>Adicionar</button>
+            <div class="main-form__priority">
+              <label for="task-priority">Prioridade</label><br>
+              <select name="task-priority" id="task-priority">
+                <option value="Indiferente">Indiferente</option>
+                <option value="Importante">Importante</option>
+                <option value="Urgente">Urgente</option>
+              </select>
+            </div>
+            <div class="main-form__tagger">
+              <label for="task-tagger">Tags (máx. 4)</label><br>
+              <input type="text" name="tags" id="task-tagger"/>
+            </div>
+            <div class="main-form__add-button">
+              <button id="add-task" disabled>✅ Adicionar</button>
+            </div>
           </form>
         </section>
-      </main>
 
-      <main class="main__right">
         <section class="todo-list__action-buttons">
           <button id="clear-task-list">Limpar Todo List</button>
-          <button id="order-asc-task-list">Ordenação Crescente</button>
-          <button id="order-desc-task-list">Ordenação Decrescente</button>
+          <button id="order-asc-task-list">Ordenação por Término Crescente</button>
+          <button id="order-desc-task-list">Ordenação por Término Decrescente</button>
         </section>
-        <table id="task-list">
-        </table>
-      </main>
+
+        <section id="task-list">
+        </section>
     </main>
   </body>
-  <script src="script.js"></script>
+  <script src="scripts/script.js"></script>
+  <script src="scripts/task-tagger.js"></script>
 </html>

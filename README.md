@@ -10,7 +10,7 @@ O objetivo foi criar uma lista de afazeres, utilizando HTML, JavaScript e CSS.
 
 ### ✅  Home Page
 
-### ❎  Todo List
+### ✅  Todo List
 
     - [x]  Descrição Uma string entrada pelo usuário onde ele descreve o que deve ser feito naquele ToDo.
 
@@ -20,21 +20,33 @@ O objetivo foi criar uma lista de afazeres, utilizando HTML, JavaScript e CSS.
 
     - [x]  Status Um ToDo deve ser criado com o status de incompleto.
 
-### ❎  Listagem de ToDos
+### ✅  Listagem de ToDos
 
     - [x]  O usuário poderá ver os ToDos já criados.
 
-### ❎  Dados
+### ✅  Dados
 
     - [x]  Manter a persistencia de dados.
 
-### ❎  Deletar ToDos
+### ✅  Deletar ToDos
 
     - [x]  O usuário poderá deletar os ToDos individualmente.
 
-### ❎  Filtrar e Organizar
+### ✅  Filtrar e Organizar
 
     - [x]  O usuário poderá filtrar os ToDos por datas de deadline.
+
+### ✅  Tags
+
+    - [x]  O usuário poderá adiconar tags de sua preferência. Ex.: Escola, Trabalho, Casa.
+
+### ✅  Edição de Todos
+
+    - [x]  O usuário deve ser capaz de realizar alterações aos dados contidos no ToDo.
+
+### ✅  Prioridade de ToDos
+
+    - [x]  O usuário deve ser capaz de adicionar prioridades aos ToDos, similarmente a Tags, mas porém pre-definidas.
 
   
 ## Tecnologias Utilizadas
