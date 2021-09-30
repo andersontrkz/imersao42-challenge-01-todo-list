@@ -95,12 +95,12 @@ select {
   border-radius: 8px;
   width: 88vw;
 }
-.task-card__task-section {
-  font-weight: 600;
-}
 
 .task-card__selected {
-  background-color: rgb(0, 100, 100);
-  color: aliceblue;
+  background-color: rgb(251, 247, 180);
   transition: .9s;
 }
+
+/* @media only screen and (min-width: 768px) and (max-width: 959px){
+
+} */

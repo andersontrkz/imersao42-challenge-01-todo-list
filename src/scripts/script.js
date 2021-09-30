@@ -25,7 +25,7 @@ window.onload = () => {
       allow_duplicates: false,
       allow_spaces: true,
   });
-  };
+};
 
 let taskObject = {};
 const task_list = document.getElementById('task-list');
@@ -145,12 +145,12 @@ const generateTaskList = ({ task, startDate, endDate, taskStatus, tags, priority
   const tagsSection = document.createElement("section");
   const prioritySection = document.createElement("section");
 
-  taskSection.innerHTML = task;
-  startDateSection.innerHTML = startDate;
-  endDateSection.innerHTML = endDate;
-  statusSection.innerHTML = taskStatus;
-  prioritySection.innerHTML = priority;
-  tagsSection.innerHTML = tags;
+  taskSection.innerHTML = `<b>Atividade</b>: ${task}`;
+  startDateSection.innerHTML = `<b>Ínicio</b>: ${startDate}`;
+  endDateSection.innerHTML = `<b>Término</b>: ${endDate}`;
+  statusSection.innerHTML = `<b>Status</b>: ${taskStatus}`;
+  prioritySection.innerHTML = `<b>Prioridade</b>: ${priority}`;
+  tagsSection.innerHTML = `<b>Tags</b>: ${tags}`;
 
   taskSection.className = 'task-card__task-section';
   startDateSection.className = 'task-card__start-date-section';
@@ -189,7 +189,7 @@ const clearTaskForm = () => {
   taskTagger.value = '';
 };
 
-const endDateConverter = (date) => {
+const dateFormatter = (date) => {
   const [year, month , day] = date.split("-");
 
   return `${day}/${month}/${year}`;
@@ -198,11 +198,12 @@ const endDateConverter = (date) => {
 const addTask = () => {  
   const addButton = document.getElementById('add-task');
   const endDate = document.getElementById('task-end-date').value;
-  
+  const startDate = document.getElementById('task-start-date').value;
+
   taskObject.task = document.getElementById('task').value;
   taskObject.taskStatus = document.getElementById('task-status').value;
-  taskObject.startDate = document.getElementById('task-start-date').value;
-  taskObject.endDate = endDateConverter(endDate);
+  taskObject.startDate = dateFormatter(startDate);
+  taskObject.endDate = dateFormatter(endDate);
   taskObject.priority = document.getElementById('task-priority').value;
   taskObject.tags = document.getElementById('task-tagger').value;
   
@@ -227,12 +228,12 @@ const storeTaskList = () => {
 
   for (let index = 0; index < task_list.childElementCount; index += 1) {
     taskListStore.push({
-      task: task_list.children[index].children[0].innerHTML,
-      startDate: task_list.children[index].children[1].innerHTML,
-      endDate: task_list.children[index].children[2].innerHTML,
-      taskStatus: task_list.children[index].children[3].innerHTML,
-      priority: task_list.children[index].children[4].innerHTML,
-      tags: task_list.children[index].children[5].innerHTML,
+      task: (task_list.children[index].children[0].innerHTML).split(': ')[1],
+      startDate: (task_list.children[index].children[1].innerHTML).split(': ')[1],
+      endDate: (task_list.children[index].children[2].innerHTML).split(': ')[1],
+      taskStatus: (task_list.children[index].children[3].innerHTML).split(': ')[1],
+      priority: (task_list.children[index].children[4].innerHTML).split(': ')[1],
+      tags: (task_list.children[index].children[5].innerHTML).split(': ')[1],
     });
   };
 
